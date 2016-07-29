@@ -124,10 +124,10 @@ CudaDeviceFunction void Run() {
 		EPressure();
 		break;
 	case NODE_NVelocity:
-		WVelocity();
+		NVelocity();
 		break;
 	case NODE_SVelocity:
-		WVelocity();
+		SVelocity();
 		break;
     case NODE_NSymmetry:
         NSymmetry();
