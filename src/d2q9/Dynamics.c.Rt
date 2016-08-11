@@ -76,8 +76,8 @@ CudaDeviceFunction void SetEquilibrum(real_t rho, real_t Jx, real_t Jy)
 ?>
 
 <?R if ( any( DensityAll$group=="BC" ) ) { ?>
-   BC[0] = Jx / rho;
-   BC[1] = Jy / rho;
+//   BC[0] = Jx / rho;
+//  BC[1] = Jy / rho;
 <?R } ?>
 }
 
@@ -245,6 +245,17 @@ CudaDeviceFunction void CollisionMRT()
 	C( R[selR], (R * S)[selR]);
 
 
+ if ( any( DensityAll$group=="BC" ) ) { 
+?> 
+    Jx += BC[0]*0.5;
+    Jy += BC[1]*0.5;
+<?R
+ } 
+
+?>
+    Jx = Jx + rho*GravitationX ;
+    Jy = Jy + rho*GravitationY ;
+<?R
 
 
     C( R[selR], (R + EQ$Req)[selR]);
